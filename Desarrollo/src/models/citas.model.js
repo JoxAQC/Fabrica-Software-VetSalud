@@ -1,4 +1,4 @@
-const { createConnection } = require('../database/database.js');
+const { createConnection } = require("../database/database.js");
 
 function obtenerCitas(callback) {
   const connection = createConnection();
@@ -8,7 +8,7 @@ function obtenerCitas(callback) {
       return callback(error, null);
     }
 
-    connection.query('SELECT * FROM vw_detallesconsulta', (err, results) => {
+    connection.query("SELECT * FROM VW_DETALLESCONSULTA", (err, results) => {
       connection.end();
       if (err) {
         return callback(err, null);
@@ -27,7 +27,7 @@ function registrarCita(cita, callback) {
       return callback(connectionError, null);
     }
 
-    connection.query('INSERT INTO TB_CITAS SET ?', cita, (err, results) => {
+    connection.query("INSERT INTO TB_CITAS SET ?", cita, (err, results) => {
       connection.end();
       if (err) {
         return callback(err, null);
