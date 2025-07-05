@@ -44,22 +44,22 @@ function obtenerUsuarioPorCorreo(correo, callback) {
   const connection = createConnection();
 
   connection.connect((error) => {
-      if (error) {
-          return callback(error, null);
-      }
+    if (error) {
+      return callback(error, null);
+    }
 
       connection.query('SELECT * FROM TB_USUARIO WHERE EMAIL_USUARIO = ?', [correo], (err, results) => {
-          connection.end();
-          if (err) {
-              return callback(err, null);
-          }
+        connection.end();
+        if (err) {
+          return callback(err, null);
+        }
 
-          if (results.length === 0) {
-              return callback(null, null); // Usuario no encontrado
-          }
+        if (results.length === 0) {
+          return callback(null, null); // Usuario no encontrado
+        }
 
-          const usuario = results[0];
-          return callback(null, usuario);
+        const usuario = results[0];
+        return callback(null, usuario);
       });
   });
 }
@@ -68,22 +68,22 @@ function obtenerUsuarioPorId(usuarioId, callback) {
   const connection = createConnection();
 
   connection.connect((error) => {
-      if (error) {
-          return callback(error, null);
-      }
+    if (error) {
+      return callback(error, null);
+    }
 
       connection.query('SELECT * FROM TB_USUARIO WHERE ID_USUARIO = ?', [usuarioId], (err, results) => {
-          connection.end();
-          if (err) {
-              return callback(err, null);
-          }
+        connection.end();
+        if (err) {
+          return callback(err, null);
+        }
 
-          if (results.length === 0) {
-              return callback(null, null);
-          }
+        if (results.length === 0) {
+          return callback(null, null);
+        }
 
-          const usuario = results[0];
-          return callback(null, usuario);
+        const usuario = results[0];
+        return callback(null, usuario);
       });
   });
 }
@@ -92,28 +92,32 @@ function obtenerUsuarioPorDni(usuarioId, callback) {
   const connection = createConnection();
 
   connection.connect((error) => {
-      if (error) {
-          return callback(error, null);
-      }
+    if (error) {
+      return callback(error, null);
+    }
 
       connection.query('SELECT * FROM TB_USUARIO WHERE DNI_USUARIO = ?', [usuarioId], (err, results) => {
-          connection.end();
-          if (err) {
-              return callback(err, null);
-          }
+        connection.end();
+        if (err) {
+          return callback(err, null);
+        }
 
-          if (results.length === 0) {
-              return callback(null, null);
-          }
+        if (results.length === 0) {
+          return callback(null, null);
+        }
 
-          const usuario = results[0];
-          return callback(null, usuario);
+        const usuario = results[0];
+        return callback(null, usuario);
       });
   });
 }
 
 function registrarMascota(usuarioId, nombre, tipo, raza, sexo, fecha, foto, evidencia, callback) {
   const connection = createConnection();
+
+  const petPic = typeof foto === 'string' ? foto : fs.readFileSync(foto);
+  const petEvidence =
+    typeof evidencia === 'string' ? evidencia : fs.readFileSync(evidencia);
 
   const mascota = {
     ID_USUARIO: usuarioId,
@@ -122,8 +126,8 @@ function registrarMascota(usuarioId, nombre, tipo, raza, sexo, fecha, foto, evid
     RAZA_MASCOTA: raza,
     SEXO_MASCOTA: sexo,
     FECHA_NACIMIENTO_MASCOTA: fecha,
-    IMAGEN_MASCOTA: fs.readFileSync(foto), // Lee el archivo de la foto
-    EVIDENCIA_MASCOTA: fs.readFileSync(evidencia), // Lee el archivo de la evidencia
+    IMAGEN_MASCOTA: petPic,
+    EVIDENCIA_MASCOTA: petEvidence,
   };
 
   connection.connect((connectionError) => {
@@ -132,12 +136,12 @@ function registrarMascota(usuarioId, nombre, tipo, raza, sexo, fecha, foto, evid
     }
 
     connection.query('INSERT INTO TB_MASCOTAS SET ?', mascota, (err, results) => {
-      connection.end();
-      if (err) {
-        return callback(err, null);
-      }
+        connection.end();
+        if (err) {
+          return callback(err, null);
+        }
 
-      return callback(null, results);
+        return callback(null, results);
     });
   });
 }
@@ -151,12 +155,12 @@ function obtenerMascotasPorUsuario(usuarioId, callback) {
     }
 
     connection.query('SELECT * FROM TB_MASCOTAS WHERE ID_USUARIO = ?', [usuarioId], (err, results) => {
-      connection.end();
-      if (err) {
-        return callback(err, null);
-      }
+        connection.end();
+        if (err) {
+          return callback(err, null);
+        }
 
-      return callback(null, results);
+        return callback(null, results);
     });
   });
 }
