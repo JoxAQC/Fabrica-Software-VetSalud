@@ -450,6 +450,55 @@ router.get(
   FichaMedicaController.obtenerDetallesFichaMedica
 );
 
+// Anonymous appointment registration route (no authentication required)
+router.post("/registrarCitaAnonima", async (req, res) => {
+  const { name, pet_name, specialty, species, appointment, sex } = req.body;
+
+  if (!name || !pet_name || !specialty || !species || !appointment || !sex) {
+    return res.status(400).json({
+      error: "Faltan datos obligatorios",
+      required: [
+        "name",
+        "pet_name",
+        "specialty",
+        "species",
+        "appointment",
+        "sex",
+      ],
+      received: { name, pet_name, specialty, species, appointment, sex },
+    });
+  }
+
+  console.log("Registrando cita anonima:", {
+    name,
+    pet_name,
+    specialty,
+    species,
+    appointment,
+    sex,
+  });
+
+  CitasController.registrarCitaAnonima(
+    { name, pet_name, specialty, species, appointment, sex },
+    (error, resultado) => {
+      if (error) {
+        console.error("Error al registrar cita anonima:", error);
+        return res.status(500).json({
+          error: "Error al registrar la cita anonima",
+          details: error.message,
+        });
+      }
+
+      console.log("Cita anonima registrada correctamente:", resultado);
+      return res.status(200).json({
+        success: true,
+        message: "Cita anonima registrada correctamente",
+        data: resultado,
+      });
+    }
+  );
+});
+
 router.get("*", (req, res) => {
   const filePath = path.join(__dirname, "../view/e404.html");
   res.sendFile(filePath);

@@ -2,92 +2,105 @@
 <!DOCTYPE html>
 <html lang="es">
 	<%- include ("templates/head.ejs", {titulo: 'Inicio', css: '/css/style.css'}) %>
-	<body>
-		<%- include ("templates/admin.header.ejs") %>;
-		<section class="banner">
-			<div class="content-banner">
+  <body>
+    <%- include ("templates/admin.header.ejs") %>;
+    <section class="banner">
+      <div class="content-banner">
 				<h1 style="color: #0097CD;">Bienvenido</h1>
-                <h1>de Vuelta</h1>
-				<a href="/clientes">Ver clientes</a>
-			</div>
+        <h1>de Vuelta</h1>
+        <a href="/clientes">Ver clientes</a>
+      </div>
 			<img src="images/adminback.svg" alt="">
-		</section>
-		<footer class="footer">
-			<div class="container container-footer">
-				<div class="menu-footer">
-					<div class="contact-info">
-						<button class="button-footer">
-							<p class="title-footer">Libro de reclamaciones</p>
-						</button>
-						<div class="social-icons">
-							<span class="facebook">
-								<i class="fa-brands fa-facebook-f"></i>
-							</span>
-							<span class="twitter">
-								<i class="fa-brands fa-twitter"></i>
-							</span>
-							<span class="youtube">
-								<i class="fa-brands fa-youtube"></i>
-							</span>
-							<span class="pinterest">
-								<i class="fa-brands fa-pinterest-p"></i>
-							</span>
-							<span class="instagram">
-								<i class="fa-brands fa-instagram"></i>
-							</span>
-						</div>
-					</div>
+    </section>
+    <footer class="footer">
+      <div class="container container-footer">
+        <div class="menu-footer">
+          <div class="contact-info">
+            <button class="button-footer">
+              <p class="title-footer">Libro de reclamaciones</p>
+            </button>
+            <div class="social-icons">
+              <span class="facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+              </span>
+              <span class="twitter">
+                <i class="fa-brands fa-twitter"></i>
+              </span>
+              <span class="youtube">
+                <i class="fa-brands fa-youtube"></i>
+              </span>
+              <span class="pinterest">
+                <i class="fa-brands fa-pinterest-p"></i>
+              </span>
+              <span class="instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </span>
+            </div>
+          </div>
 
-					<div class="information">
+          <div class="information">
 						<button  class="button-footer">
-							<p class="title-footer">Conócenos</p>
-						</button>
-					</div>
+              <p class="title-footer">Conócenos</p>
+            </button>
+          </div>
 
-					<div class="my-account">
+          <div class="my-account">
 						<button  class="button-footer">
-							<p class="title-footer">Transparencia</p>
-						</button>
-					</div>
+              <p class="title-footer">Transparencia</p>
+            </button>
+          </div>
 
-					<div class="newsletter">
-						<p class="title-footer">Estamos para ayudarte</p>
+          <div class="newsletter">
+            <p class="title-footer">Estamos para ayudarte</p>
 
-						<div class="content">
+            <div class="content">
 							<p>
 								Horario de atención: 8am-8pm
 							</p>
 							<br>
-							<button>Contáctanos</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</footer>
+              <button>Contáctanos</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-		<script>
+    <script>
                         
-			const nav = document.querySelector("#nav");
-			const abrir = document.querySelector("#menu-abrir");
-			const cerrar = document.querySelector("#menu-cerrar");
-		
-			abrir.addEventListener("click", () => {
-			  nav.classList.add("visible");
-			  nav.classList.toggle("action");
-			});
+      const nav = document.querySelector("#nav");
+      const abrir = document.querySelector("#menu-abrir");
+      const cerrar = document.querySelector("#menu-cerrar");
 
-			cerrar.addEventListener("click", () => {
-			  nav.classList.remove("visible");
+      abrir.addEventListener("click", () => {
+        nav.classList.add("visible");
+        nav.classList.toggle("action");
+      });
+
+      cerrar.addEventListener("click", () => {
+        nav.classList.remove("visible");
 			})
-		</script>
+    </script>
 
-		<script
-			src="https://kit.fontawesome.com/81581fb069.js"
-			crossorigin="anonymous"
-		></script>
+    <script
+      src="https://kit.fontawesome.com/81581fb069.js"
+      crossorigin="anonymous"
+    ></script>
 
-		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-		<script src="js/script.js"></script>
-	</body>
+    <script src="js/script.js"></script>
+
+    <!-- Landbot chatbot -->
+    <script
+      SameSite="None; Secure"
+      type="module"
+      src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"
+    ></script>
+    <script type="module">
+      var myLandbot = new Landbot.Livechat({
+        configUrl:
+          "https://storage.googleapis.com/landbot.online/v3/H-3030725-A8H7619OI0H7830V/index.json",
+      });
+    </script>
+  </body>
 </html>
